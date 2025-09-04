@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navigation />
+    <Navigation :isDark="isDark" :toggleTheme="toggleTheme" />
     <Hero @openContactModal="openContactModal" />
     <Services :services="services" />
     <Team :team="team" />
@@ -24,6 +24,7 @@ import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
 import ContactModal from './components/ContactModal.vue'
 import { useData } from './composables/useData.js'
+import { useTheme } from './composables/useTheme.js'
 
 export default {
   name: 'App',
@@ -38,6 +39,7 @@ export default {
   },
   setup() {
     const { services, team, contactInfo } = useData()
+    const { isDark, toggleTheme } = useTheme()
     const showContactModal = ref(false)
 
     const openContactModal = () => {
@@ -60,7 +62,9 @@ export default {
       showContactModal,
       openContactModal,
       closeContactModal,
-      handleFormSubmitted
+      handleFormSubmitted,
+      isDark,
+      toggleTheme
     }
   }
 }
